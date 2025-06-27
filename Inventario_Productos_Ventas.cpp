@@ -46,7 +46,6 @@ void registrarNuevoProducto(){
 	
 	cout<<"----- Añadir Nuevo Producto -----"<<endl<<endl;
 	cout<<"Ingrese el nombre del producto a añadir: ";
-	cin.ignore();
 	getline(cin, aniadir.nombre);
 	int salirE=0;
 	do{
@@ -68,6 +67,24 @@ void registrarNuevoProducto(){
 	cout<<endl<<"El producto se añadio correctamente, regresando al menu..."<<endl;
     Sleep(2000);
     system("cls");
+}
+
+void listarProductos(){
+	if(cantPro==0){
+        cout<<"No existen productos que se puedan mostrar!!!";
+        Sleep(2000);
+        system("cls");
+        return;
+    }
+    for(int i=0;i<cantPro;i++){
+    	cout<<i+1<<"._ Producto:"<<endl<<endl;
+        cout<<"Nombre del Producto :"<<prod[i].nombre<<endl;
+        cout<<"Precio actual: "<<prod[i].precio<<endl;
+        cout<<endl<<"----------------------------------"<<endl<<endl;
+	}
+    cout<<endl<<"Presione enter para volver al menu principal...";
+	cin.get();
+	system("cls");
 }
 
 int main(){	
@@ -106,11 +123,13 @@ int main(){
 		
 		switch(opcion){
 			case 1:{
+			system("cls");
 			registrarNuevoProducto();
 			break;
 			}
 			case 2:{
-			//listarProductos();
+			system("cls");
+			listarProductos();
 			break;
 			}
 			case 3:{
