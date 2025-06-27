@@ -18,40 +18,95 @@ Requisitos:
 #include <windows.h>
 #include <string>
 using namespace std;
+const int tam=99;
+int cantPro=0;
+int indice;
 
 struct Producto{
     string nombre;
     float precio;
 };
-struct venta{
+Producto prod[tam];
+struct Venta{
     int idVenta;
     string producto;
     int cant;
     float precioT;
 };
+Venta vent[tam];
+
+void registrarNuevoProducto(){
+	if(cantPro>=tam){
+        cout<<"Ya no se pueden agregar más productos. Límite alcanzado~!!!";
+        Sleep(2000);
+        system("cls");
+        return;
+    }
+	Producto aniadir;
+	
+	cout<<"----- Añadir Nuevo Producto -----"<<endl<<endl;
+	cout<<"Ingrese el nombre del producto a añadir: ";
+	cin.ignore();
+	getline(cin, aniadir.nombre);
+	int salirE=0;
+	do{
+		cout<<endl<<"Ingrese el precio del producto: ";
+   		cin>>aniadir.precio;
+    	if(cin.fail()||aniadir.precio<=0){
+            cout<<"El precio tiene que ser solo con números!!!"<<endl;
+            cin.clear();
+            cin.ignore(1000, '\n');
+            salirE=0;
+        }else{
+        	salirE=1;
+        	break;
+        }
+    }while(salirE!=1);
+	cin.ignore();
+    prod[cantPro]=aniadir;
+    cantPro++;
+	cout<<endl<<"El producto se añadio correctamente, regresando al menu..."<<endl;
+    Sleep(2000);
+    system("cls");
+}
 
 int main(){	
 	SetConsoleOutputCP(CP_UTF8);
 	int opcion;
+	int salir=0;
 	do{
-		cout<<"-----Inventario de Productos y Ventas-----"<<endl<<endl;
-		cout<<"Elija la opcion que desea realizar en el programa:"<<endl;
-		cout<<"1) Registrar un nuevo producto"<<endl;
-		cout<<"2) Listar todos los productos registrados"<<endl;
-		cout<<"3) Buscar un producto por su nombre"<<endl;
-		cout<<"4) Actualizar los datos de un producto"<<endl;
-		cout<<"5) Eliminar un producto"<<endl;
-		cout<<"6) Registrar una nueva venta"<<endl;
-		cout<<"7) Listar las ventas ya realizadas"<<endl;
-		cout<<"8) Calcular el total de ventas realizadas"<<endl;
-		cout<<"9) Salir del programa"<<endl;
-		cout<<"Selecione su opcion: ";
-		cin>>opcion;
-		cout<<endl;
+		do{
+			cout<<"-----Inventario de Productos y Ventas-----"<<endl<<endl;
+			cout<<"Elija la opcion que desea realizar en el programa:"<<endl;
+			cout<<"1) Registrar un nuevo producto"<<endl;
+			cout<<"2) Listar todos los productos registrados"<<endl;
+			cout<<"3) Buscar un producto por su nombre"<<endl;
+			cout<<"4) Actualizar los datos de un producto"<<endl;
+			cout<<"5) Eliminar un producto"<<endl;
+			cout<<"6) Registrar una nueva venta"<<endl;
+			cout<<"7) Listar las ventas ya realizadas"<<endl;
+			cout<<"8) Calcular el total de ventas realizadas"<<endl;
+			cout<<"9) Salir del programa"<<endl;
+			cout<<"Selecione su opcion: ";
+			cin>>opcion;
+			cin.ignore();
+			cout<<endl;
+			if(cin.fail()||opcion<=0){
+	            cout<<"La opcion debe ser un número!!!"<<endl;
+	            cin.clear();
+	            cin.ignore(1000, '\n');
+	            Sleep(1500);
+				system("cls");
+				salir=0;
+	        }else{
+	        	salir=1;
+	        	break;
+	        }
+		}while(salir!=1);
 		
 		switch(opcion){
 			case 1:{
-			//registrarNuevoProducto();
+			registrarNuevoProducto();
 			break;
 			}
 			case 2:{
