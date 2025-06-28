@@ -87,6 +87,39 @@ void listarProductos(){
 	system("cls");
 }
 
+void buscarProductoNombre(){
+	if(cantPro==0){
+        cout<<"No existen productos que puedas buscar!!!";
+        Sleep(2000);
+        system("cls");
+        return;
+    }
+	string nomBusc;
+    cout<<"----- Buscar Producto por Nombre -----"<<endl;
+    cout<<"Ingrese el nombre del producto que desea buscar: ";
+    getline(cin,nomBusc);
+    
+	bool entr=false;
+	for(int i=0;i<cantPro;i++){
+		if(prod[i].nombre==nomBusc){
+			cout<<endl<<"Producto encontrado~!!!"<<endl<<endl;
+            cout<<"Nombre: "<<prod[i].nombre<<endl;
+            cout<<"Precio: "<<prod[i].precio<<endl;
+            cout<<endl<<"Presione enter para volver al menu principal...";
+			cin.get();
+			system("cls");
+            entr=true;
+            break;
+		}
+	}
+	if(entr=false){
+        cout<<"Producto no encontrado :("<<endl;
+    }
+	cout<<endl<<"Presione enter para volver al menu principal...";
+	cin.get();
+	system("cls");
+}
+
 int main(){	
 	SetConsoleOutputCP(CP_UTF8);
 	int opcion;
@@ -133,7 +166,8 @@ int main(){
 			break;
 			}
 			case 3:{
-			//buscarProductoNombre();
+			system("cls");
+			buscarProductoNombre();
 			break;
 			}
 			case 4:{
