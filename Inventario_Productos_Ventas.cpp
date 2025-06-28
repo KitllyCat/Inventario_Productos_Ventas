@@ -37,7 +37,7 @@ Venta vent[tam];
 
 void registrarNuevoProducto(){
 	if(cantPro>=tam){
-        cout<<"Ya no se pueden agregar más productos. Límite alcanzado~!!!";
+        cout<<endl<<"Ya no se pueden agregar más productos. Límite alcanzado~!!!";
         Sleep(2000);
         system("cls");
         return;
@@ -71,7 +71,7 @@ void registrarNuevoProducto(){
 
 void listarProductos(){
 	if(cantPro==0){
-        cout<<"No existen productos que se puedan mostrar!!!";
+        cout<<endl<<"No existen productos que se puedan mostrar!!!";
         Sleep(2000);
         system("cls");
         return;
@@ -89,7 +89,7 @@ void listarProductos(){
 
 void buscarProductoNombre(){
 	if(cantPro==0){
-        cout<<"No existen productos que puedas buscar!!!";
+        cout<<endl<<"No existen productos que puedas buscar!!!";
         Sleep(2000);
         system("cls");
         return;
@@ -116,6 +116,50 @@ void buscarProductoNombre(){
         cout<<"Producto no encontrado :("<<endl;
     }
 	cout<<endl<<"Presione enter para volver al menu principal...";
+	cin.get();
+	system("cls");
+}
+
+void actualizarDatosProducto(){
+	if(cantPro==0){
+        cout<<endl<<"No existen productos que puedas actualizar!!!";
+        Sleep(2000);
+        system("cls");
+        return;
+    }
+	string nomBusc;
+    cout<<"----- Actualizar un producto existente -----"<<endl;
+    cout<<"Ingrese el nombre del producto que desea buscar: ";
+    getline(cin,nomBusc);
+    bool entr=false;
+	for(int i=0;i<cantPro;i++){
+		if(prod[i].nombre==nomBusc){
+			cout<<endl<<"Producto encontrado~!!!"<<endl<<endl;
+            cout<<"Nombre: "<<prod[i].nombre<<endl;
+            cout<<"Precio: "<<prod[i].precio<<endl;
+            cout<<endl<<"Ahora se editaran los nuevos datos..."<<endl<<endl;
+            cout << "Ingrese el nuevo nombre: ";
+            getline(cin, prod[i].nombre);
+            float newPre;
+            do{
+            	cout<<"Ingrese el nuevo precio: ";
+                cin>>newPre;
+                if (cin.fail() || newPre<= 0){
+                	cout << "Precio inválido!!! Intente nuevamente"<<endl<<endl;
+               		cin.clear();
+                    cin.ignore(1000, '\n');
+                }else{
+                    prod[i].precio=newPre;
+                   	break;
+                }
+            }while (true);
+            break;
+		}
+	}
+	if(entr=false){
+        cout<<"Producto no encontrado :("<<endl;
+    }
+    cout<<endl<<"Presione enter para volver al menu principal...";
 	cin.get();
 	system("cls");
 }
@@ -171,7 +215,8 @@ int main(){
 			break;
 			}
 			case 4:{
-			//actualizarDatosProducto();
+			system("cls");
+			actualizarDatosProducto();
 			break;
 			}
 			case 5:{
