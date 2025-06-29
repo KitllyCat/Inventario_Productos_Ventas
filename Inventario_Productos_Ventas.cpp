@@ -164,6 +164,34 @@ void actualizarDatosProducto(){
 	system("cls");
 }
 
+void eliminarProducto(){
+	if(cantPro==0){
+        cout<<"Ya no existen productos, no se puede eliminar más!!!";
+        Sleep(2000);
+        system("cls");
+        return;
+    }
+	cout<<"----- Eliminar producto -----"<<endl<<endl;
+	cout<<"Ingrese el numero de orden del producto a eliminar(Índice): ";
+	cin>>indice;
+	cin.ignore();
+	indice=indice-1;	
+	if(indice>=0 && indice<cantPro){
+		for(int i=indice;i<cantPro-1;i++){
+			prod[i]=prod[i+1];
+		}
+	}else{
+		cout<<"El número es incorrecto o inexistente. Regresando al menú..."<<endl;
+        Sleep(2000);
+        system("cls");
+        return;
+	}
+	cantPro--;
+	cout<<"Producto eliminado correctamente, regresando al menu...";
+    Sleep(2000);
+    system("cls");
+}
+
 int main(){	
 	SetConsoleOutputCP(CP_UTF8);
 	int opcion;
@@ -220,7 +248,8 @@ int main(){
 			break;
 			}
 			case 5:{
-			//eliminarProducto();
+			system("cls");
+			eliminarProducto();
 			break;
         	}
 			case 6:{
