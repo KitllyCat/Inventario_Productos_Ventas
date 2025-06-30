@@ -268,6 +268,26 @@ void listarVentasRealizadas(){
 	system("cls");
 }
 
+void calcularTotalVentas(){
+	if(totalVent==0){
+    	cout<<endl<<"No existen ventas que se puedan calcular!!!";
+    	Sleep(2000);
+    	system("cls");
+    	return;
+    }
+    float total=0;
+    for(int i=0;i<totalVent;i++){
+        total+=vent[i].precioT;
+    }
+    cout<<"----- Total de ventas realizadas -----"<<endl<<endl;
+    cout<<"Monto total acumulado por ventas: " <<total<<"."<<endl;
+    cout<<"---------------------------------------"<<endl;
+
+    cout<<endl<<"Presione enter para volver al menu principal...";
+	cin.get();
+	system("cls");
+}
+
 int main(){	
 	SetConsoleOutputCP(CP_UTF8);
 	int opcion;
@@ -339,7 +359,8 @@ int main(){
 			break;
 			}
 			case 8:{
-			//calcularTotalVentas();
+			system("cls");
+			calcularTotalVentas();
 			break;
 			}
 			case 9:{
