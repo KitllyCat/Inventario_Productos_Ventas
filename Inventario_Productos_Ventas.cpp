@@ -248,6 +248,26 @@ void registrarNuevaVenta(){
     system("cls");
 }
 
+void listarVentasRealizadas(){
+	if(totalVent==0){
+    	cout<<endl<<"No existen ventas que se puedan mostrar!!!";
+    	Sleep(2000);
+    	system("cls");
+    	return;
+    }
+    cout<<"----- Total de ventas realizadas -----"<<endl<<endl;
+    for(int i=0;i<totalVent;i++){
+        cout<<"ID Venta: #000"<<vent[i].idVenta<<endl;
+        cout<<"Producto: "<<vent[i].producto<<endl;
+        cout<<"Cantidad: "<<vent[i].cant<<endl;
+        cout<<"Precio Total: "<<vent[i].precioT<<endl;
+        cout<<"-----------------------------"<<endl<<endl;
+	}
+    cout<<endl<<"Presione enter para volver al menu principal...";
+	cin.get();
+	system("cls");
+}
+
 int main(){	
 	SetConsoleOutputCP(CP_UTF8);
 	int opcion;
@@ -314,7 +334,8 @@ int main(){
 			break;
 			}
 			case 7:{
-			//listarVentasRealizadas();
+			system("cls");
+			listarVentasRealizadas();
 			break;
 			}
 			case 8:{
