@@ -20,6 +20,7 @@ Requisitos:
 using namespace std;
 const int tam=99;
 int cantPro=0;
+int totalVent=0;
 int indice;
 
 struct Producto{
@@ -114,10 +115,9 @@ void buscarProductoNombre(){
 	}
 	if(entr=false){
         cout<<"Producto no encontrado :("<<endl;
+        Sleep(2000);
+        system("cls");
     }
-	cout<<endl<<"Presione enter para volver al menu principal...";
-	cin.get();
-	system("cls");
 }
 
 void actualizarDatosProducto(){
@@ -192,6 +192,62 @@ void eliminarProducto(){
     system("cls");
 }
 
+void registrarNuevaVenta(){
+	if(cantPro==0){
+        cout<<"No se puede registrar ninguna venta... No hay produtos disponibles!!!";
+        Sleep(2000);
+        system("cls");
+        return;
+    }
+    string nomProd;
+	cout<<"----- Añadir Nueva venta -----"<<endl<<endl;
+	cout<<"Ingrese el nombre del producto que se va a vender: ";
+	getline(cin,nomProd);
+	Venta aniadir;
+	bool siVent=false;
+	for(int i=0;i<cantPro;i++){
+		if(prod[i].nombre==nomProd){
+			cout<<endl<<"Producto encontrado~!!!"<<endl<<endl;
+			int salirV=0;
+				do{
+					cout<<"Ingrese la cantidad que se va a vender: ";
+			   		cin>>aniadir.cant;
+			    	if(cin.fail()||aniadir.cant<=0){
+			            cout<<"La cantidad tiene que ser solo con números!!!"<<endl;
+			            cin.clear();
+			            cin.ignore(1000, '\n');
+			            salirV=0;
+			            cin.ignore();
+			        }else{
+			        	salirV=1;
+			        	break;
+			        }
+			    }while(salirV!=1);            
+			aniadir.idVenta=totalVent+1;
+		    aniadir.producto=prod[i].nombre;
+		    aniadir.precioT=aniadir.cant*prod[i].precio;
+			vent[totalVent]=aniadir;
+			totalVent++;
+			cout<<endl<<"Venta registrada exitosamente."<<endl<<endl;
+			cout<<"ID Venta: #000"<<aniadir.idVenta<<endl;
+			cout<<"Producto: "<<aniadir.producto<<endl;
+			cout<<"Cantidad: "<<aniadir.cant<<endl;
+			cout<<"Precio total: "<<aniadir.precioT<<endl;
+			siVent=true;
+			break;
+		}
+	}
+	if(siVent==false){
+	    cout<<endl<<"Producto no encontrado :("<<endl;
+	    Sleep(2500);
+	    system("cls");
+	    return;
+	}
+    cout<<endl<<"La venta se ha realizado con exito, regresando al menu...";
+    Sleep(4000);
+    system("cls");
+}
+
 int main(){	
 	SetConsoleOutputCP(CP_UTF8);
 	int opcion;
@@ -253,7 +309,8 @@ int main(){
 			break;
         	}
 			case 6:{
-			//registrarNuevaVenta();
+			system("cls");
+			registrarNuevaVenta();
 			break;
 			}
 			case 7:{
